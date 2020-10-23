@@ -1,13 +1,14 @@
 import React, { useEffect, Suspense } from "react";
-import { LOCAL_STORAGE_TOKEN_NAME } from "./constants/defaultValues";
+import { LOCAL_STORAGE_TOKEN } from "./constants/defaultValues";
 import { Switch, Route, Redirect } from "react-router-dom";
 import axios from "axios";
+import {useSelector} from 'react-redux';
 
 const AuthRoute = ({ component: Component, authUser, ...rest }) => (
   <Route
     {...rest}
     render={(props) =>
-      true ? (
+      authUser ? (
         <Component {...props} />
       ) : (
         <Redirect
@@ -22,10 +23,12 @@ const ViewApp = React.lazy(() => import("./views/app"));
 const ViewUser = React.lazy(() => import("./views/user"));
 const ViewError = React.lazy(() => import("./views/error"));
 
-const App = ({ user }) => {
+const App = () => {
+  const { user, loading, error } = useSelector((state) => state.authUser);
+  
   useEffect(() => {
-    const token = localStorage.getItem(LOCAL_STORAGE_TOKEN_NAME);
-    axios.defaults.headers.common.Authorization = token
+    const token = localStorage.getItem(LOCAL_STORAGE_TOKEN);
+    if (token) axios.defaults.headers.common.Authorization = token
       ? `Bearer ${token}`
       : null;
   }, []);

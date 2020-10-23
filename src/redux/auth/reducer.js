@@ -4,6 +4,7 @@ import {
   LOGIN_USER_ERROR,
   REGISTER_USER,
   REGISTER_USER_SUCCESS,
+  REGISTER_USER_ERROR,
   LOGOUT_USER,
   LOGOUT_USER_SUCCESS,
 } from "./constants";
@@ -21,6 +22,12 @@ export default (state = INIT_STATE, action) => {
       return { ...state, loading: true };
     case REGISTER_USER_SUCCESS:
       return { ...state, loading: false };
+    case REGISTER_USER_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload ? action.payload.message : null,
+      };
     case LOGIN_USER:
       return { ...state, loading: true };
     case LOGIN_USER_SUCCESS:
