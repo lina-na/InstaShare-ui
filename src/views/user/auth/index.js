@@ -29,6 +29,7 @@ const Authorization = ({ history, match }) => {
   const handleNotRegClick = () => {
     setValidateErrors({});
     setIsRegisteredBefore((prevValue) => !prevValue);
+    setData({ email: "", password: "" });
   };
 
   const handleSubmit = async (event) => {
