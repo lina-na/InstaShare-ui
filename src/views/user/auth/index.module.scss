@@ -1,0 +1,23 @@
+.page_wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.outer_wrapper {
+  max-width: 50rem;
+  width: 100%;
+}
+
+.inner_wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 0 30px;
+}
+
+.form_header {
+  background-color: rgb(57, 137, 234);
+  color: #fff;
+  font-size: 4rem;
+  text-transform: uppercase;
+}
