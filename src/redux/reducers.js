@@ -4,7 +4,7 @@ import mainReducer from "./main/reducer";
 
 const reducers = combineReducers({
   authUser,
-  mainReducer,
+  // mainReducer,
 });
 
 export default reducers;

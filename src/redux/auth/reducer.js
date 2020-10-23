@@ -35,5 +35,7 @@ export default (state = INIT_STATE, action) => {
       return { ...state, loading: true };
     case LOGOUT_USER_SUCCESS:
       return { ...state, user: action.payload, error: null };
+    default:
+      return INIT_STATE;
   }
 };
