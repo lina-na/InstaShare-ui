@@ -4,7 +4,7 @@ import styles from "./index.module.scss";
 import axios from "axios";
 
 const UploadFilesForm = () => {
-  const [fileForUpload, setFileForUpload] = useState();
+  const [fileForUpload, setFileForUpload] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -38,7 +38,7 @@ const UploadFilesForm = () => {
         />
       </FormGroup>
       <div className="d-flex justify-content-center mt-4">
-        <Button className={styles.submit_button} color="primary">
+        <Button className={styles.submit_button} color="primary" type='submit'>
           Submit
         </Button>
       </div>
