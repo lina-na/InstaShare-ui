@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logoutUser } from "../../redux/auth/actions";
 import axios from "axios";
 import { responseStatuses } from "../../constants/defaultValues";
@@ -8,12 +8,11 @@ import { Switch, Redirect, Route } from "react-router-dom";
 const Home = React.lazy(() => import("./home"));
 
 const App = ({ match, history }) => {
-  const { user, loading, error } = useSelector((state) => state.authUser);
   const dispatch = useDispatch();
 
   const logoutUserCallback = useCallback(() => {
     dispatch(logoutUser(history));
-  }, [history, logoutUser]);
+  }, [history, dispatch]);
 
   useEffect(() => {
     axios.interceptors.response.use(
@@ -30,7 +29,7 @@ const App = ({ match, history }) => {
         return Promise.reject(error);
       }
     );
-  }, [logoutUser]);
+  }, [logoutUserCallback]);
 
   return (
     <div>

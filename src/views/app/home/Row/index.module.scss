@@ -1,0 +1,17 @@
+.row {
+  &_outer_wrapper {
+    margin-bottom: 2rem;
+    &:first-child {
+      margin-top: 2rem;
+    }
+    &:hover {
+      cursor: pointer;
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+  }
+  &_inner_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
