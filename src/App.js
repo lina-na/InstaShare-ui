@@ -2,7 +2,8 @@ import React, { useEffect, Suspense } from "react";
 import { LOCAL_STORAGE_TOKEN } from "./constants/defaultValues";
 import { Switch, Route, Redirect } from "react-router-dom";
 import axios from "axios";
-import {useSelector} from 'react-redux';
+import { useSelector } from "react-redux";
+import CustomSpinner from "./components/common/CustomSpinner";
 
 const AuthRoute = ({ component: Component, authUser, ...rest }) => (
   <Route
@@ -24,18 +25,19 @@ const ViewUser = React.lazy(() => import("./views/user"));
 const ViewError = React.lazy(() => import("./views/error"));
 
 const App = () => {
-  const { user, loading, error } = useSelector((state) => state.authUser);
-  
+  const { user } = useSelector((state) => state.authUser);
+
   useEffect(() => {
     const token = localStorage.getItem(LOCAL_STORAGE_TOKEN);
-    if (token) axios.defaults.headers.common.Authorization = token
-      ? `Bearer ${token}`
-      : null;
+    if (token)
+      axios.defaults.headers.common.Authorization = token
+        ? `Bearer ${token}`
+        : null;
   }, []);
 
   return (
     <div>
-      <Suspense fallback="loading...">
+      <Suspense fallback={<CustomSpinner />}>
         <Switch>
           <AuthRoute path="/app" authUser={user} component={ViewApp} />
           <Route path="/user" render={(props) => <ViewUser {...props} />} />
