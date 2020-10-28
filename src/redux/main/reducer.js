@@ -28,7 +28,7 @@ export default (state = INIT_STATE, action) => {
     case GET_ALL_FILES_ERROR:
       return { ...state, loading: false, error: action.payload };
     case SUBMIT_FILE:
-      return { ...state, error: null };
+      return { ...state, error: null, isAdditionOver: false };
     case SUBMIT_FILE_SUCCESS:
       return {
         ...state,
